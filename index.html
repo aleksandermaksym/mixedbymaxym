@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MixedByMaxym – Upload</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      margin: 10px 0;
+      font-size: 16px;
+      padding: 8px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+      background-color: #1f1f1f;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    #progress-container {
+      width: 80%;
+      margin: 30px auto;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 24px;
+      display: none;
+      position: relative;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: lime;
+      transition: width 0.2s;
+    }
+    #progress-text {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      line-height: 24px;
+      font-size: 14px;
+      color: #fff;
+    }
+    #link {
+      margin-top: 30px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔊 MixedByMaxym – Upload dla Klientów</h1>
+  <input type="file" id="fileInput" />
+  <br>
+  <button onclick="uploadFile()">📤 Generuj link</button>
+
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+    <div id="progress-text">0%</div>
+  </div>
+
+  <div id="link"></div>
+
+  <script type="module">
+    import { put } from "https://cdn.skypack.dev/@vercel/blob";
+
+    window.uploadFile = async function () {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+      const progressContainer = document.getElementById("progress-container");
+      const progressBar = document.getElementById("progress-bar");
+      const progressText = document.getElementById("progress-text");
+      const linkDiv = document.getElementById("link");
+
+      if (!file) {
+        alert("Wybierz plik!");
+        return;
+      }
+
+      progressContainer.style.display = "block";
+      progressBar.style.width = "0%";
+      progressText.textContent = "0%";
+      linkDiv.innerHTML = "";
+
+      const { url } = await put(file.name, file, {
+        access: 'public',
+        onUploadProgress: (progressEvent) => {
+          const percent = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+          progressBar.style.width = percent + "%";
+          progressText.textContent = percent + "%";
+        }
+      });
+
+      linkDiv.innerHTML = `
+        ✅ Link gotowy:<br>
+        <input type="text" value="${url}" readonly style="width:80%;padding:10px;" />
+        <br><br>
+        <button onclick="copyLink()">📋 Skopiuj link</button>
+      `;
+    };
+
+    window.copyLink = function () {
+      const input = document.querySelector("#link input");
+      input.select();
+      document.execCommand("copy");
+      alert("Link skopiowany!");
+    };
+  </script>
+</body>
+</html>
