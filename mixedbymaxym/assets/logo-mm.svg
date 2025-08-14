@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
-  <!-- Mirrored MM: lewa para i prawa w odbiciu -->
-  <g stroke="#FFFFFF" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M20 100 L90 20 L160 100" />
-    <path d="M160 100 L230 20 L300 100" transform="scale(-1,1) translate(-460,0)"/>
-  </g>
-</svg>
