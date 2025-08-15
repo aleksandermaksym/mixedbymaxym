@@ -97,7 +97,38 @@
       .lead, .off-item p, ul.clean{font-size:18px}
     }
     @media (prefers-reduced-motion: reduce){ .grid{animation:none}.reveal{opacity:1;transform:none;filter:none}.mask > span{animation:none;-webkit-mask:none;mask:none;color:inherit} }
-  </style>
+/* Twój obecny CSS */
+
+/* MOBILE */
+@media (max-width: 860px){
+  .lead, .off-item p, ul.clean{font-size:18px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .grid{animation:none}.reveal{opacity:1;transform:none;filter:none}
+  .mask > span{animation:none}
+}
+
+/* Nowy kod responsywności */
+@media (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  section {
+    width: 100%;
+    padding: 20px;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+</style>
 </head>
 <body>
   <div class="backdrop" aria-hidden="true">
