@@ -1,129 +1,146 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mixedbymaxym.com/">
+  <meta property="og:title" content="Mixed by Maxym">
+  <meta property="og:description" content="Mix & Mastering • Warszawa • Top brzmienie">
+  <meta property="og:image" content="https://mixedbymaxym.com/og-image.png">
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://mixedbymaxym.com/">
+  <meta property="twitter:title" content="Mixed by Maxym">
+  <meta property="twitter:description" content="Mix & Mastering • Warszawa • Top brzmienie">
+  <meta property="twitter:image" content="https://mixedbymaxym.com/og-image.png">
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Mixed by Maxym — Mix & Master</title>
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark"/>
+  <link rel="icon" href="assets/favicon.svg"/>
 
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.svg" />
-
-  <!-- Open Graph (podgląd linku) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mixedbymaxym.com/" />
-  <meta property="og:title" content="Mixed by Maxym" />
-  <meta property="og:description" content="Mix & Mastering • Warszawa • Top brzmienie" />
-  <meta property="og:image" content="https://mixedbymaxym.com/og-image.png" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://mixedbymaxym.com/" />
-  <meta name="twitter:title" content="Mixed by Maxym" />
-  <meta name="twitter:description" content="Mix & Mastering • Warszawa • Top brzmienie" />
-  <meta name="twitter:image" content="https://mixedbymaxym.com/og-image.png" />
-
-  <!-- Fonts -->
+  <!-- Fonty (zostały jak w wersji bez „pixelu”) -->
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Michroma&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b0d10; --ink:#eef2f6; --muted:#a4adb7;
-      --acc:#E6B10A; --line:#1a2028; --grid:#ffffff1c; --max: 960px;
-      --ease: cubic-bezier(.19,.9,.22,1);
-      --acc-glow: rgba(230,177,10,.35);
+      --bg:#0b0d10; --ink:#eef2f6; --muted:#9aa3ad;
+      --acc:#E6B10A; --line:#182029; --max: 960px;
+      --reveal-dur:.55s; /* szybciej */
+      --stagger:90ms;    /* mniejsze opóźnienia */
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;background:var(--bg);color:var(--ink);
+      margin:0; background:var(--bg); color:var(--ink);
       font:18px/1.5 'Barlow Condensed', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.15px; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+      letter-spacing:.15px;
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
       overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
 
-    /* BACKDROP */
-    .backdrop{position:fixed;inset:0;z-index:-2}
+    /* TŁO */
+    .backdrop{position:fixed; inset:0; z-index:-2}
     .backdrop::before{
-      content:"";position:absolute;inset:0;background:url('assets/bg.webp') center/cover no-repeat;opacity:.44;filter:contrast(1.05) saturate(.9) brightness(.9);
+      content:""; position:absolute; inset:0;
+      background:url('assets/bg.webp') center/cover no-repeat;
+      opacity:.42; filter:contrast(1.05) saturate(.9) brightness(.9);
     }
     .grid{
-      position:absolute;inset:0;mix-blend-mode:overlay;pointer-events:none;
+      position:absolute; inset:0; mix-blend-mode:overlay; pointer-events:none;
       background:
-        repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 22px),
-        repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 22px);
-      opacity:.20; animation:blink 2.4s steps(12,end) infinite, jitter 8s ease-in-out infinite alternate;
+        repeating-linear-gradient(0deg, rgba(255,255,255,.11) 0 1px, transparent 1px 22px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.11) 0 1px, transparent 1px 22px);
+      opacity:.22;
+      animation:blink 1.8s steps(12,end) infinite, jitter 5.8s ease-in-out infinite alternate;
     }
-    @keyframes blink{ 50%{opacity:.13} }
-    @keyframes jitter{ from{transform:translate3d(0,0,0)} to{transform:translate3d(-0.8%, -0.8%, 0)} }
-    .grain{position:absolute;inset:-15%;mix-blend-mode:soft-light;opacity:.22;pointer-events:none}
-    .grain svg{width:100%;height:100%}
+    @keyframes blink{ 50%{opacity:.12} }
+    @keyframes jitter{ from{transform:translate3d(0,0,0)} to{transform:translate3d(-1%, -1%, 0)} }
+
+    .grain{position:absolute; inset:-15%; mix-blend-mode:soft-light; opacity:.22; pointer-events:none}
+    .grain svg{width:100%; height:100%}
 
     /* LAYOUT */
-    main{max-width:var(--max);margin-inline:auto;padding:0 22px}
-    .section{padding:96px 0;text-align:center;margin-inline:auto}
+    main{max-width:var(--max); margin-inline:auto; padding:0 22px}
+    .section{padding:84px 0; text-align:center; margin-inline:auto}
+
     .title{
       font-family:'Michroma', system-ui; font-weight:700; letter-spacing:.02em;
-      font-size:clamp(36px,5.6vw,62px); margin:0 0 16px; display:inline-block; position:relative; will-change:transform
+      font-size:clamp(34px,5.3vw,60px); margin:0 0 14px;
+      display:inline-block; position:relative;
+      /* bez żółtej poświaty */
+      text-shadow:none;
     }
-    .lead{color:var(--muted);font-size:clamp(18px,2.2vw,22px);margin:0 auto;max-width:70ch}
-    .cta{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn{padding:12px 20px;border-radius:999px;border:1px solid var(--line);background:rgba(12,15,20,.75);transition:transform .2s, box-shadow .2s; font-weight:700;letter-spacing:.6px}
+    .lead{color:var(--muted); font-size:clamp(18px,2.1vw,22px); margin:0 auto; max-width:70ch}
+
+    .cta{margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+    .btn{
+      padding:12px 20px; border-radius:999px; border:1px solid var(--line);
+      background:rgba(12,15,20,.75); transition:transform .18s, box-shadow .18s;
+      font-weight:700; letter-spacing:.6px
+    }
     .btn:hover{transform:translateY(-1px)}
-    .btn.acc{background:var(--acc);border-color:transparent;color:#111;box-shadow:0 8px 30px rgba(230,177,10,.25)}
+    .btn.acc{background:var(--acc); border-color:transparent; color:#111; box-shadow:0 8px 26px rgba(230,177,10,.22)}
 
-    /* HERO — only central logo */
-    .hero{min-height:92vh;display:grid;place-items:center;padding-top: env(safe-area-inset-top)}
-    .logo{width:min(232px,44vw);margin-inline:auto;display:block;filter:drop-shadow(0 18px 32px rgba(0,0,0,.5))}
+    /* HERO */
+    .hero{min-height:92vh; display:grid; place-items:center; padding-top: env(safe-area-inset-top)}
 
-    /* OFFER */
-    .offer{display:grid;grid-template-columns:1fr;gap:30px;margin-top:14px}
-    .off-item h3{font-family:'Michroma', system-ui;margin:0 0 6px;font-size:28px;letter-spacing:.02em}
-    .off-item p{margin:0;color:var(--muted)}
-    .price{margin-top:8px;font-weight:800;letter-spacing:.6px}
+    /* LOGO – inline SVG, zawsze idealnie wycentrowane */
+    .logo{width:min(232px,44vw); margin-inline:auto; display:block; filter:drop-shadow(0 18px 32px rgba(0,0,0,.5))}
 
-    /* BASE REVEAL */
-    .reveal{--d:0ms; opacity:0; transform:translateY(64px) scale(.965); filter:blur(3px) saturate(.95)}
+    /* OFERTA */
+    .offer{display:grid; grid-template-columns:1fr; gap:26px; margin-top:10px}
+    .off-item h3{font-family:'Michroma', system-ui; margin:0 0 6px; font-size:26px; letter-spacing:.02em}
+    .off-item p{margin:0; color:var(--muted)}
+    .price{margin-top:8px; font-weight:800; letter-spacing:.6px; color:var(--ink)}
+
+    /* REVEAL + MASKA (jak wcześniej, ale szybciej) */
+    .reveal{--d:0ms; opacity:0; transform:translateY(54px) scale(.975); filter:blur(2px)}
     .reveal.in{
       opacity:1; transform:none; filter:none;
-      transition:opacity .9s var(--ease) var(--d), transform .9s var(--ease) var(--d), filter .9s var(--ease) var(--d);
+      transition:
+        opacity var(--reveal-dur) ease var(--d),
+        transform var(--reveal-dur) ease var(--d),
+        filter var(--reveal-dur) ease var(--d);
     }
-    /* Title pop */
-    .title.reveal.in{ animation: title-pop .9s var(--ease) var(--d) both }
-    @keyframes title-pop{ 0%{transform:translateY(14px) scale(.985)} 60%{transform:translateY(0) scale(1.012)} 100%{transform:none} }
-    /* Accent sweep + glow */
-    .mask.animate{ animation:kern .95s var(--ease) var(--d) forwards }
-    @keyframes kern{ 0%{ letter-spacing:.18em; opacity:.45 } 100%{ letter-spacing:.02em; opacity:1 } }
+    .mask{ display:inline-block; position:relative; --p:0% }
+    .mask.animate{ animation:unmask var(--reveal-dur) ease forwards var(--d) }
+    @keyframes unmask{
+      0%{ letter-spacing:.14em; opacity:.55 }
+      100%{ letter-spacing:.02em; opacity:1 }
+    }
     .mask > span{
       background:linear-gradient(90deg, var(--acc), var(--acc)) no-repeat;
       -webkit-background-clip:text; background-clip:text; color:transparent;
       -webkit-mask:linear-gradient(90deg, #000 0 var(--p), transparent var(--p) 100%);
               mask:linear-gradient(90deg, #000 0 var(--p), transparent var(--p) 100%);
-      animation:sweep .95s var(--ease) var(--d) forwards;
+      animation:revealbar var(--reveal-dur) ease forwards var(--d);
     }
-    @keyframes sweep{ from{ --p:0% } to{ --p:100% } }
-    .glow.reveal.in{ text-shadow:0 0 16px var(--acc-glow), 0 0 42px rgba(230,177,10,.12); transition:text-shadow 1.2s var(--ease) var(--d) }
+    @keyframes revealbar{ from{ --p:0% } to{ --p:100% } }
 
-    /* Lists */
-    ul.clean{list-style:none;padding:0;margin:12px 0 0 0;color:var(--muted)}
-    ul.clean li{margin:6px 0}
-
-    /* MOBILE polish */
+    /* MOBILE TWEAKS */
     @media (max-width: 860px){
       .lead, .off-item p, ul.clean{font-size:18px}
     }
-    @media (max-width: 768px){
-      body{display:flex;flex-direction:column;align-items:center;text-align:center}
-      .section{width:100%;padding:72px 20px}
-      img,video{max-width:100%;height:auto}
-      .hero{min-height:80vh}
+    @media (max-width: 480px){
+      .hero{min-height:78vh}
+      .title{font-size:clamp(30px,9vw,44px)}
     }
+
+    /* prefers-reduced-motion */
     @media (prefers-reduced-motion: reduce){
-      .grid{animation:none}.reveal{opacity:1;transform:none;filter:none}
-      .mask > span{animation:none;-webkit-mask:none;mask:none;color:inherit}
-      .title.reveal.in{animation:none}
+      .grid{animation:none}
+      .reveal{opacity:1; transform:none; filter:none}
+      .mask > span{animation:none; -webkit-mask:none; mask:none; color:inherit}
     }
+
+    /* Listy */
+    ul.clean{list-style:none; padding:0; margin:12px 0 0 0; color:var(--muted)}
+    ul.clean li{margin:6px 0}
   </style>
 </head>
 <body>
@@ -131,9 +148,13 @@
     <div class="grid"></div>
     <div class="grain">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-        <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5">
-          <animate attributeName="baseFrequency" values="0.7;0.95;0.8;0.9" dur="10s" repeatCount="indefinite"/></feTurbulence>
-          <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 0.55"/></feComponentTransfer></filter>
+        <filter id="n">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5">
+            <animate attributeName="baseFrequency" values="0.7;0.95;0.8;0.9" dur="9s" repeatCount="indefinite"/>
+          </feTurbulence>
+          <feColorMatrix type="saturate" values="0"/>
+          <feComponentTransfer><feFuncA type="table" tableValues="0 0.55"/></feComponentTransfer>
+        </filter>
         <rect width="100%" height="100%" filter="url(#n)"/>
       </svg>
     </div>
@@ -141,63 +162,90 @@
 
   <!-- HERO -->
   <section class="hero">
-    <img class="logo reveal" style="--d:140ms" src="assets/logo-mm.svg" alt="Mixed by Maxym">
+    <!-- Inline SVG logo – zawsze idealnie wyśrodkowane -->
+    <svg class="logo reveal" style="--d: calc(var(--stagger) * 1)" viewBox="0 0 240 120" aria-label="Mixed by Maxym" role="img">
+      <path d="M30,90 L90,30 L120,60 L150,30 L210,90"
+            fill="none" stroke="#fff" stroke-width="12"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </section>
 
   <main>
-    <section class="section">
-      <h2 class="title reveal glow" style="--d:140ms"><span class="mask animate"><span>Cześć, jestem Maxym.</span></span></h2>
-      <p class="lead reveal" style="--d:240ms"><span class="mask animate"><span>Od 7 lat siedzę w sound designie i pomagam artystom w produkcji, miksowaniu, pisaniu i realizowaniu piosenek. Aktualnie pracuję w Warszawie w studio GM2L. Pracuję w Logic Pro — możesz przesłać cały projekt, aby przyspieszyć proces. Narzędzia: Avalon, Tube-Tech, 1176 (UAD), Sonnox, FabFilter, Soundtoys.</span></span></p>
-      <p class="lead reveal" style="--d:320ms"><span class="mask animate"><span>Współpracowałem m.in. z: <strong>Malik Montana</strong>, <strong>Vkie</strong>, <strong>Szamz</strong>, <strong>Młody West</strong>.</span></span></p>
-      <div class="cta reveal" style="--d:380ms"><a class="btn acc" href="#kontakt">Zamów wycenę</a></div>
+    <!-- O MNIE -->
+    <section class="section reveal" style="--d: calc(var(--stagger) * 2)" id="o-mnie">
+      <h2 class="title"><span class="mask animate"><span>Cześć, jestem Maxym.</span></span></h2>
+      <p class="lead"><span class="mask animate" style="--d: calc(var(--stagger) * 3)"><span>
+        Od 7 lat siedzę w sound designie i pomagam artystom w produkcji, miksowaniu, pisaniu i realizowaniu piosenek.
+        Aktualnie pracuję w Warszawie w studio GM2L. Pracuję w Logic Pro — możesz przesłać cały projekt, aby przyspieszyć proces.
+        Narzędzia: Avalon, Tube-Tech, 1176 (UAD), Sonnox, FabFilter, Soundtoys.
+      </span></span></p>
+      <p class="lead" style="margin-top:10px"><span class="mask animate" style="--d: calc(var(--stagger) * 4)"><span>
+        Współpracowałem m.in. z: <strong>Malik Montana</strong>, <strong>Vkie</strong>, <strong>Szamz</strong>, <strong>Młody West</strong>.
+      </span></span></p>
+      <div class="cta">
+        <a class="btn acc" href="#kontakt">Zamów wycenę</a>
+      </div>
     </section>
 
-    <section class="section">
-      <h2 class="title reveal glow" style="--d:140ms"><span class="mask animate"><span>Oferta</span></span></h2>
-      <div class="offer reveal" style="--d:240ms">
+    <!-- OFERTA -->
+    <section class="section reveal" style="--d: calc(var(--stagger) * 3)" id="oferta">
+      <h2 class="title"><span class="mask animate"><span>Oferta</span></span></h2>
+      <div class="offer">
         <div class="off-item">
           <h3><span class="mask animate"><span>Mix</span></span></h3>
-          <p><span class="mask animate" style="--d:60ms"><span>Balans, selekcja, kontrola dynamiki i przestrzeni. Kreatywne zabiegi tylko tam, gdzie służą <strong>emocjom</strong>.</span></span></p>
+          <p><span class="mask animate" style="--d: calc(var(--stagger) * 4)"><span>
+            Balans, selekcja, kontrola dynamiki i przestrzeni. Kreatywne zabiegi tylko tam, gdzie służą <strong>emocjom</strong>.
+          </span></span></p>
           <div class="price">od 500 zł</div>
         </div>
         <div class="off-item">
           <h3><span class="mask animate"><span>Master</span></span></h3>
-          <p><span class="mask animate" style="--d:60ms"><span>Spójne pasmo, transjenty, szerokość stereo, zgodność mono. Final: WAV/24, MP3, ISRC/metadata.</span></span></p>
+          <p><span class="mask animate" style="--d: calc(var(--stagger) * 4)"><span>
+            Spójne pasmo, transjenty, szerokość stereo, zgodność mono. Final: WAV/24, MP3, ISRC/metadata.
+          </span></span></p>
           <div class="price">200 zł</div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2 class="title reveal glow" style="--d:140ms"><span class="mask animate"><span>Portfolio</span></span></h2>
-      <p class="lead reveal" style="--d:240ms"><span class="mask animate"><span>Wybrane mixy i realizacje.</span></span></p>
-      <div class="cta reveal" style="--d:320ms">
+    <!-- PORTFOLIO -->
+    <section class="section reveal" style="--d: calc(var(--stagger) * 3.5)" id="portfolio">
+      <h2 class="title"><span class="mask animate"><span>Portfolio</span></span></h2>
+      <p class="lead"><span class="mask animate" style="--d: calc(var(--stagger) * 4.5)"><span>Wybrane mixy i realizacje.</span></span></p>
+      <div class="cta">
         <a class="btn acc" target="_blank" rel="noreferrer" href="https://open.spotify.com/playlist/76HhXMhidruyPn8X6Np616?si=zCsxHZGxSvGieAAZRVbaZQ&pi=NxLvLOmHQra25">Spotify: mixedbymaxym</a>
       </div>
     </section>
 
-    <section class="section">
-      <h2 class="title reveal glow" style="--d:140ms"><span class="mask animate"><span>Przygotowanie plików</span></span></h2>
-      <ul class="clean reveal" style="--d:240ms">
+    <!-- PRZYGOTOWANIE -->
+    <section class="section reveal" style="--d: calc(var(--stagger) * 4)" id="przygotowanie">
+      <h2 class="title"><span class="mask animate"><span>Przygotowanie plików</span></span></h2>
+      <ul class="clean">
         <li>• Wszystkie ścieżki <strong>podpisane</strong> (np. LeadVox_Main, Hook_DBL_L).</li>
         <li>• WAV/24-bit, 44.1 kHz lub projekt Logic Pro.</li>
         <li>• Bez limiterów/clipperów na masterze.</li>
       </ul>
     </section>
 
-    <section class="section" id="kontakt">
-      <h2 class="title reveal glow" style="--d:140ms"><span class="mask animate"><span>Kontakt</span></span></h2>
-      <p class="lead reveal" style="--d:240ms"><span class="mask animate"><span>Szybka wycena i terminy — napisz co masz (stemy / projekt Logic), 2–3 referencje.</span></span></p>
-      <div class="cta reveal" style="--d:320ms">
+    <!-- KONTAKT -->
+    <section class="section reveal" style="--d: calc(var(--stagger) * 4.5)" id="kontakt">
+      <h2 class="title"><span class="mask animate"><span>Kontakt</span></span></h2>
+      <p class="lead"><span class="mask animate" style="--d: calc(var(--stagger) * 5.2)"><span>
+        Szybka wycena i terminy — napisz co masz (stemy / projekt Logic), 2–3 referencje.
+      </span></span></p>
+      <div class="cta">
         <a class="btn acc" href="mailto:aleksandermaksymbusinnes@gmail.com?subject=Zapytanie%20mix/master">✉️  Wyślij mail</a>
         <a class="btn" target="_blank" rel="noreferrer" href="https://instagram.com/aleksandermaksym">IG: @aleksandermaksym</a>
       </div>
     </section>
 
-    <section class="section">
-      <h2 class="title reveal glow" style="--d:140ms"><span class="mask animate"><span>Umów sesję</span></span></h2>
-      <p class="lead reveal" style="--d:240ms"><span class="mask animate"><span>Napisz do mnie na <strong>@aleksandermaksym</strong> albo do studia <strong>@studiogm2l</strong> — od razu podam najbliższe sloty.</span></span></p>
-      <div class="cta reveal" style="--d:320ms">
+    <!-- UMÓW SESJĘ -->
+    <section class="section reveal" style="--d: calc(var(--stagger) * 5)" id="book">
+      <h2 class="title"><span class="mask animate"><span>Umów sesję</span></span></h2>
+      <p class="lead"><span class="mask animate" style="--d: calc(var(--stagger) * 5.6)"><span>
+        Napisz do mnie na <strong>@aleksandermaksym</strong> albo do studia <strong>@studiogm2l</strong> — od razu podam najbliższe sloty.
+      </span></span></p>
+      <div class="cta">
         <a class="btn acc" target="_blank" rel="noreferrer" href="https://instagram.com/aleksandermaksym">DM @aleksandermaksym</a>
         <a class="btn" target="_blank" rel="noreferrer" href="https://instagram.com/studiogm2l">DM @studiogm2l</a>
       </div>
@@ -209,16 +257,18 @@
   </footer>
 
   <script>
-    // Force start at top
+    // Start zawsze od góry (też po back/forward cache)
     window.history.scrollRestoration = 'manual';
     window.addEventListener('pageshow', function(e){ if(e.persisted) window.scrollTo(0,0); });
     window.addEventListener('load', ()=>{ setTimeout(()=>window.scrollTo(0,0), 0); });
 
-    // Reveal
+    // Szybszy reveal (obserwator)
     const io = new IntersectionObserver((es)=>es.forEach(e=>{
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    }), {threshold:.15});
+    }), {threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Rok w stopce
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
